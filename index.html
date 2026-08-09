@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arnav Jalwekar | Senior Developer & Game Engineer</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(22, 28, 42, 0.7);
+      --accent: #3b82f6;
+      --accent-glow: #60a5fa;
+      --success: #10b981;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.08);
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Background Glow Effect */
+    .bg-glow {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
+      top: -100px;
+      left: -100px;
+      z-index: -1;
+      animation: floatBg 10s infinite alternate ease-in-out;
+    }
+
+    @keyframes floatBg {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(150px, 150px); }
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      background: linear-gradient(90deg, #fff, var(--accent-glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent-glow);
+    }
+
+    /* Layout Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+      padding-top: 4rem;
+    }
+
+    .hero-img-container {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .hero-img-container::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      background: linear-gradient(45deg, var(--accent), #9333ea, var(--accent-glow));
+      border-radius: 50%;
+      z-index: 0;
+      filter: blur(10px);
+      animation: pulseGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.5; transform: scale(0.98); }
+      100% { opacity: 0.9; transform: scale(1.03); }
+    }
+
+    .hero-img {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      z-index: 1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-text h1 {
+      font-size: 3.2rem;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-text .subtitle {
+      font-size: 1.3rem;
+      color: var(--accent-glow);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-text p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    /* Buttons */
+    .btn {
+      position: relative;
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-glow);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Reveal Animation Classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      border-radius: 2px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      padding: 1.75rem;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-glow);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+    }
+
+    .skill-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .skill-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Projects Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card .meta {
+      font-size: 0.85rem;
+      color: var(--accent-glow);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--accent-glow);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* GitHub Section Styles */
+    .github-badges {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .github-badges img {
+      height: 28px;
+      border-radius: 4px;
+    }
+
+    .github-stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .github-stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .github-stat-card img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: #111622;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .close-btn:hover {
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent-glow);
+    }
+
+    .form-group select option {
+      background: #111622;
+      color: var(--text);
+    }
+
+    /* Animated Success Screen */
+    .success-container {
+      display: none;
+      text-align: center;
+      padding: 1rem 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .checkmark-svg {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      display: block;
+    }
+
+    .checkmark-circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 2;
+      stroke: var(--success);
+      fill: none;
+      animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+
+    .checkmark-check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      stroke: var(--success);
+      stroke-width: 3;
+      animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+    }
+
+    @keyframes stroke {
+      100% { stroke-dashoffset: 0; }
+    }
+
+    .success-container h3 {
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .success-container p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .hero-text h1 {
+        font-size: 2.3rem;
+      }
+
+      .section-title::after {
+        left: 25%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <nav>
+    <div class="logo">Arnav Jalwekar</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#" onclick="openModal(); return false;">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <header class="hero" id="about">
+      <div class="hero-img-container reveal">
+        <img src="https://cdn.discordapp.com/attachments/1497854761922330705/1535883828181082132/Mendingyt_Minecraft_logo.jpg?ex=6a7962c7&is=6a781147&hm=c08b70283342cb1a771b4cfeb07aa7065504ea6ea7da503b23dfe2ac2976e28b&" alt="Arnav Jalwekar" class="hero-img" />
+      </div>
+      <div class="hero-text reveal">
+        <h1>Arnav Jalwekar</h1>
+        <div class="subtitle">Senior Software & Native Game Developer</div>
+        <p>Expert engineer specializing in custom C++ game engine architecture, high-performance Java systems, Python automation, and modern CSS responsive interfaces.</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button onclick="openModal()" class="btn">Get In Touch</button>
+          <a href="https://arnavjalwekar4-code.github.io/arnav-dev/" target="_blank" class="btn btn-secondary">Visit GitHub Profile Page</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2 class="section-title reveal">Technical Expertise</h2>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <span class="icon">⚙️</span>
+          <h3>C++ & Systems Engineering</h3>
+          <p>Native memory management, custom game architecture, OOP design, pointers, algorithms, and real-time game performance.</p>
+        </div>
+        <div class="skill-card reveal">
+          <span class="icon">☕</span>
+          <h3>Java Architecture</h3>
+          <p>Multi-threaded applications, enterprise microservices, Spring Boot, and robust scalable backend systems.</p>
+        </div>
+        <div class="skill-card reveal">
+          <span class="icon">🐍</span>
+          <h3>Python & Automation</h3>
+          <p>Asynchronous APIs, scripting, backend automation, data workflows, and rapid system prototyping.</p>
+        </div>
+        <div class="skill-card reveal">
+          <span class="icon">🎨</span>
+          <h3>Modern CSS & Frontend</h3>
+          <p>Custom UI design, responsive keyframe animations, Flexbox/Grid layouts, glassmorphism, and seamless UX.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2 class="section-title reveal">Featured Engineering</h2>
+      <div class="grid">
+        <div class="card reveal">
+          <h3>Custom C++ Game Engine</h3>
+          <div class="meta">C++ • Native Memory Architecture</div>
+          <p>Built a high-performance 2D/3D custom rendering engine from scratch without relying on pre-made drag-and-drop game builders.</p>
+          <div class="tags">
+            <span class="tag">C++</span>
+            <span class="tag">Game Dev</span>
+            <span class="tag">OpenGL</span>
+          </div>
+        </div>
+        <div class="card reveal">
+          <h3>Distributed Microservices Infrastructure</h3>
+          <div class="meta">Java • Spring Boot • High Concurrency</div>
+          <p>Designed fault-tolerant backend services capable of handling thousands of requests per second with low latency.</p>
+          <div class="tags">
+            <span class="tag">Java</span>
+            <span class="tag">Backend</span>
+            <span class="tag">Microservices</span>
+          </div>
+        </div>
+        <div class="card reveal">
+          <h3>Automated Data Ingestion Pipeline</h3>
+          <div class="meta">Python • AsyncIO • REST API</div>
+          <p>Created high-speed asynchronous scripts for batch processing, automated system monitoring, and analytics collection.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Automation</span>
+            <span class="tag">APIs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GitHub Activity Section -->
+    <section id="github">
+      <h2 class="section-title reveal">GitHub Open Source & Metrics</h2>
+      <p class="reveal" style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        Check out active contributions, repositories, and technical stack badges live on GitHub.
+      </p>
+
+      <!-- Shields/Badges -->
+      <div class="github-badges reveal">
+        <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++" />
+        <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" alt="Java" />
+        <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+        <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+        <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
+        <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
+      </div>
+
+      <!-- Realtime GitHub Stats Cards -->
+      <div class="github-stats-container reveal">
+        <div class="github-stat-card">
+          <img src="https://github-readme-stats.vercel.app/api?username=arnavjalwekar4-code&show_icons=true&theme=tokyonight&hide_border=true" alt="GitHub Stats" />
+        </div>
+        <div class="github-stat-card">
+          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=arnavjalwekar4-code&layout=compact&theme=tokyonight&hide_border=true" alt="Most Used Languages" />
+        </div>
+      </div>
+
+      <div class="reveal" style="text-align: center;">
+        <a href="https://arnavjalwekar4-code.github.io/arnav-dev/" target="_blank" class="btn">Explore Live GitHub Page ➔</a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2 class="section-title reveal">Connect</h2>
+      <p class="reveal" style="color: var(--text-muted); margin-bottom: 2rem;">Interested in custom engine development, systems engineering, or backend collaboration? Reach out anytime.</p>
+      <button onclick="openModal()" class="btn reveal">Contact Me</button>
+    </section>
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      
+      <!-- Contact Form -->
+      <form id="contactForm" action="https://formspree.io/f/xaewqzea" method="POST">
+        <h2 style="margin-bottom: 1.5rem;">Contact Arnav</h2>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="Full Name" required placeholder="John Doe" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="Email" required placeholder="john@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" id="country" name="Country" required placeholder="United States" />
+        </div>
+        <div class="form-group">
+          <label for="devType">Type of Development</label>
+          <select id="devType" name="Type of Development" required>
+            <option value="" disabled selected>Select an option...</option>
+            <option value="C++ / Game Development">C++ / Game Development</option>
+            <option value="Java Backend Development">Java Backend Development</option>
+            <option value="Python Automation / Scripting">Python Automation / Scripting</option>
+            <option value="Frontend / Web Design">Frontend / Web Design</option>
+            <option value="Full Project Consultation">Full Project Consultation</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="Message" rows="4" required placeholder="Describe your project or inquiry..."></textarea>
+        </div>
+        <button type="submit" id="submitBtn" class="btn" style="width: 100%;">Send Message</button>
+      </form>
+
+      <!-- Success Screen -->
+      <div id="successContainer" class="success-container">
+        <svg class="checkmark-svg" viewBox="0 0 52 52">
+          <circle class="checkmark-circle" cx="26" cy="26" r="25"/>
+          <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+        <h3>Application Received!</h3>
+        <p>Our team will contact you soon.<br>Tysm for applying!</p>
+        <button onclick="closeModal()" class="btn" style="width: 100%;">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Arnav Jalwekar. Built with C++, Java, Python & Modern CSS expertise.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Reveal Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Modal Functions
+    function openModal() {
+      document.getElementById('contactModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('contactModal').classList.remove('active');
+      setTimeout(() => {
+        // Reset form and UI view after modal close transition
+        document.getElementById('contactForm').style.display = 'block';
+        document.getElementById('successContainer').style.display = 'none';
+        document.getElementById('contactForm').reset();
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').innerText = 'Send Message';
+      }, 300);
+    }
+
+    // Close modal when clicking outside content
+    window.onclick = function(e) {
+      const modal = document.getElementById('contactModal');
+      if (e.target === modal) {
+        closeModal();
+      }
+    }
+
+    // AJAX Form Handling
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Sending...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          document.getElementById('successContainer').style.display = 'block';
+        } else {
+          alert('Oops! There was a problem submitting your form. Please try again.');
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Send Message';
+        }
+      } catch (error) {
+        alert('Oops! There was a network error. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Send Message';
+      }
+    });
+  </script>
+
+</body>
+</html>

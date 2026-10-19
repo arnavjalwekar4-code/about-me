@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arnav Jalwekar — Cyber-Amber Systems Architect</title>
+
+    <!-- Tailwind CSS with Custom Theme Extender -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyberDark: '#0a0518',
+                        cyberObsidian: '#12092b',
+                        cyberPanel: 'rgba(18, 9, 43, 0.75)',
+                        neonGold: '#fbbf24',
+                        neonAmber: '#f59e0b',
+                        neonViolet: '#a855f7',
+                        neonPurple: '#8b5cf6',
+                        neonCyan: '#06b6d4'
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'spin-slow': 'spin 14s linear infinite',
+                        'float': 'float 5s ease-in-out infinite',
+                        'scanline': 'scanline 8s linear infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 15px rgba(251,191,36,0.4))' },
+                            '50%': { opacity: '0.8', filter: 'drop-shadow(0 0 25px rgba(168,85,247,0.6))' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-10px) rotate(0.5deg)' }
+                        },
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(1000%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0a0518;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #fef3c7;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* Custom Coding Cursor Trail */
+        .coding-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #fbbf24;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 99999;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+        }
+
+        .coding-cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            background-color: #34d399;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 100000;
+            box-shadow: 0 0 10px #34d399;
+        }
+
+        .font-mono-code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Glassmorphism Electric Gold & Deep Violet Theme */
+        .cyber-glass {
+            background: rgba(18, 9, 43, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
+        }
+
+        .cyber-glass-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .cyber-glass-hover:hover {
+            border-color: rgba(245, 158, 11, 0.6);
+            box-shadow: 0 15px 35px -5px rgba(251, 191, 36, 0.3), 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+
+        /* Scanline Mask */
+        .scanline-mask {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.5)
+            );
+            background-size: 100% 4px;
+        }
+
+        /* Animated Equalizer Bars */
+        .eq-bar {
+            width: 3px;
+            background: #fbbf24;
+            border-radius: 2px;
+            animation: eqBounce 1.2s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(1) { animation-delay: 0.1s; height: 16px; }
+        .eq-bar:nth-child(2) { animation-delay: 0.4s; height: 8px; }
+        .eq-bar:nth-child(3) { animation-delay: 0.2s; height: 22px; }
+        .eq-bar:nth-child(4) { animation-delay: 0.5s; height: 12px; }
+
+        @keyframes eqBounce {
+            0% { transform: scaleY(0.2); }
+            100% { transform: scaleY(1.2); }
+        }
+
+        .paused .eq-bar {
+            animation-play-state: paused;
+            transform: scaleY(0.2);
+            background: #a855f7;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0518;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4c1d95;
+            border-radius: 4px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fbbf24;
+        }
+    </style>
+</head>
+<body class="selection:bg-amber-400 selection:text-black">
+
+    <!-- Custom Coding Cursor Elements -->
+    <div id="cursor" class="coding-cursor hidden sm:block"></div>
+    <div id="cursor-dot" class="coding-cursor-dot hidden sm:block"></div>
+
+    <!-- ========================================== -->
+    <!-- 1. 0-100% LOADING & TELEMETRY SCREEN       -->
+    <!-- ========================================== -->
+    <div id="loading-screen" class="fixed inset-0 z-[100] bg-cyberDark flex flex-col items-center justify-center p-6 transition-all duration-1000">
+        <div class="absolute inset-0 scanline-mask opacity-40 pointer-events-none"></div>
+
+        <!-- Glowing Cyber Rings -->
+        <div class="absolute w-[360px] h-[360px] sm:w-[520px] sm:h-[520px] rounded-full border border-amber-500/20 border-dashed animate-spin-slow pointer-events-none"></div>
+        <div class="absolute w-[280px] h-[280px] sm:w-[420px] sm:h-[420px] rounded-full border border-purple-500/20 animate-pulse-glow pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-xl w-full text-center space-y-6">
+            <!-- Logo Container -->
+            <div class="relative w-24 h-24 mx-auto rounded-2xl p-[2px] bg-gradient-to-tr from-amber-400 via-amber-500 to-purple-600 shadow-2xl shadow-amber-500/30">
+                <div class="w-full h-full bg-cyberDark rounded-[14px] overflow-hidden flex items-center justify-center">
+                    <img src="logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="hidden font-mono-code font-extrabold text-amber-400 text-3xl">AJ</span>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-amber-300 via-yellow-400 to-purple-400 bg-clip-text text-transparent uppercase">
+                    ARNAV JALWEKAR
+                </h1>
+                <p id="loader-status" class="text-xs font-mono-code text-amber-400 tracking-widest uppercase mt-1">
+                    INITIALIZING SATELLITE TELEMETRY...
+                </p>
+            </div>
+
+            <!-- 0-100% Progress Bar Container -->
+            <div class="space-y-2 font-mono-code text-left">
+                <div class="flex justify-between text-xs text-amber-300">
+                    <span>LOADING MODULES</span>
+                    <span id="loader-percentage" class="font-bold text-amber-400">0%</span>
+                </div>
+                <div class="w-full bg-cyberObsidian h-3 rounded-full overflow-hidden border border-amber-500/30 p-[2px]">
+                    <div id="loader-bar" class="bg-gradient-to-r from-amber-500 to-purple-600 h-full rounded-full transition-all duration-75" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Live Telemetry Box -->
+            <div class="cyber-glass rounded-2xl p-5 border border-amber-500/30 text-left font-mono-code text-xs space-y-3 shadow-xl">
+                <div class="flex items-center justify-between border-b border-purple-900/60 pb-2 text-amber-300/80">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-satellite-dish text-amber-400 animate-pulse"></i> LIVE SATELLITE FEED</span>
+                    <span id="telemetry-status" class="text-amber-400 font-bold">LINK ACTIVE</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 text-amber-100">
+                    <div>
+                        <span class="text-amber-500/80 block text-[10px]">CLIENT IP</span>
+                        <span id="user-ip" class="text-amber-400 font-bold">Detecting...</span>
+                    </div>
+                    <div>
+                        <span class="text-amber-500/80 block text-[10px]">LOCATION / CITY</span>
+                        <span id="user-location" class="text-purple-400 font-bold">Nagpur, IN</span>
+                    </div>
+                    <div>
+                        <span class="text-amber-500/80 block text-[10px]">DATE & DAY</span>
+                        <span id="user-date" class="text-amber-300 font-bold">CALCULATING...</span>
+                    </div>
+                    <div>
+                        <span class="text-amber-500/80 block text-[10px]">WEATHER</span>
+                        <span id="user-weather" class="text-amber-400 font-bold">28.0°C</span>
+                    </div>
+                </div>
+
+                <div class="pt-2 border-t border-purple-900/60 flex items-center justify-between">
+                    <span class="text-amber-500/80">LIVE CLOCK:</span>
+                    <span id="user-time" class="text-amber-400 text-sm font-bold tracking-widest">00:00:00 AM</span>
+                </div>
+            </div>
+
+            <!-- Launch Button (Hidden until 100%) -->
+            <button id="enter-btn" onclick="initializePortfolio()" class="hidden relative group w-full py-4 rounded-xl font-mono-code font-bold text-sm uppercase tracking-widest text-black overflow-hidden shadow-lg shadow-amber-500/25 border border-amber-400 hover:border-amber-300 transition-all duration-300">
+                <span class="absolute inset-0 bg-gradient-to-r from-amber-400 via-amber-500 to-purple-500 opacity-90 group-hover:opacity-100 transition-opacity"></span>
+                <span class="relative z-10 flex items-center justify-center gap-2 font-extrabold text-black">
+                    <i class="fa-solid fa-power-off text-black group-hover:scale-125 transition-transform"></i> ENTER SYSTEM & PLAY AUDIO
+                </span>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 2. BACKGROUND MATRIX CANVAS                -->
+    <!-- ========================================== -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <canvas id="matrix-canvas" class="absolute inset-0 opacity-30"></canvas>
+        <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-amber-600/15 rounded-full blur-[160px] animate-pulse-glow"></div>
+        <div class="absolute top-1/2 -right-40 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[160px] animate-pulse-glow" style="animation-delay: 2.5s;"></div>
+        <div class="absolute inset-0 scanline-mask opacity-25"></div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 3. HEADER & AUDIO CONTROLLER WIDGET        -->
+    <!-- ========================================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 cyber-glass border-b border-purple-900/40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group" onmouseenter="playSfx('hover')">
+                <div class="relative w-11 h-11 rounded-xl overflow-hidden p-[2px] bg-gradient-to-tr from-amber-400 via-yellow-400 to-purple-600 shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-cyberDark rounded-[10px] overflow-hidden flex items-center justify-center">
+                        <img src="logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <span class="hidden font-mono-code text-amber-400 font-bold text-sm">AJ</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-white via-amber-100 to-amber-300 bg-clip-text text-transparent">Arnav Jalwekar</span>
+                    <span class="block text-[10px] font-mono-code text-amber-400 tracking-wider">SYSTEMS_ARCHITECT</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-amber-100/80">
+                <a href="#about" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">About</a>
+                <a href="#stats" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">Telemetry</a>
+                <a href="#skills" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">Ecosystems</a>
+                <a href="#projects" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">Projects</a>
+                <a href="#terminal" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">CLI Terminal</a>
+                <a href="#community" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">Teams</a>
+            </nav>
+
+            <!-- Audio Controller Widget + Booking Action -->
+            <div class="flex items-center gap-3">
+                <div class="cyber-glass rounded-xl px-3 py-1.5 border border-amber-500/30 flex items-center gap-3 shadow-xl">
+                    <div id="eq-container" class="flex items-center gap-1 h-5 paused cursor-pointer" onclick="toggleMusic()" title="Toggle Background Music">
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                    </div>
+
+                    <div class="hidden sm:block w-32 overflow-hidden text-[11px] font-mono-code text-amber-200">
+                        <div id="music-title" class="whitespace-nowrap truncate">Mala - Slowed Stream</div>
+                    </div>
+
+                    <button id="play-btn" onclick="toggleMusic()" title="Play/Pause" class="w-7 h-7 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 flex items-center justify-center text-xs transition-colors">
+                        <i id="play-icon" class="fa-solid fa-play"></i>
+                    </button>
+                    <button id="mute-btn" onclick="toggleMute()" title="Mute/Unmute" class="w-7 h-7 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 flex items-center justify-center text-xs transition-colors">
+                        <i id="mute-icon" class="fa-solid fa-volume-high"></i>
+                    </button>
+                </div>
+
+                <button onclick="openBookingModal()" class="hidden sm:flex px-4 py-2 rounded-xl text-xs font-mono-code font-bold bg-gradient-to-r from-amber-400 to-purple-600 text-black shadow-lg shadow-amber-500/20 hover:scale-105 transition-transform items-center gap-2 uppercase">
+                    <i class="fa-solid fa-calendar-check text-black"></i> Submit Booking
+                </button>
+
+                <button id="menu-btn" onclick="toggleMobileMenu()" class="lg:hidden text-amber-300 hover:text-white text-xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-cyberDark/95 border-b border-purple-900/50 px-6 py-6 space-y-4 font-mono-code text-sm">
+            <a href="#about" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-200 hover:text-amber-400">/about</a>
+            <a href="#stats" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-200 hover:text-amber-400">/stats</a>
+            <a href="#skills" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-200 hover:text-amber-400">/ecosystems</a>
+            <a href="#projects" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-200 hover:text-amber-400">/projects</a>
+            <a href="#terminal" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-200 hover:text-amber-400">/cli-terminal</a>
+            <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-400 to-purple-600 text-black uppercase">
+                Submit Booking
+            </button>
+        </div>
+    </header>
+
+
+    <!-- ========================================== -->
+    <!-- 4. MAIN CONTENT WRAPPER                    -->
+    <!-- ========================================== -->
+    <main class="relative z-10 pt-28">
+
+        <!-- HERO SECTION -->
+        <section id="about" class="min-h-[calc(100vh-7rem)] flex items-center justify-center max-w-7xl mx-auto px-4 sm:px-6 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+                
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono-code">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                        FULL-STACK • IOT HARDWARE • ROBOKING • AI ARCHITECT
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                        Engineering <br>
+                        <span id="typing-text" class="bg-gradient-to-r from-amber-300 via-yellow-400 to-purple-400 bg-clip-text text-transparent"></span>
+                        <span class="text-amber-400 animate-pulse">|</span>
+                    </h1>
+
+                    <p class="text-amber-200/80 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        I am <strong class="text-white">Arnav Jalwekar</strong> (<span class="font-mono-code text-amber-400 text-sm">@arnavjalwekar4-code</span>). Architecting Python AI engines, ESP32 microcontrollers, high-speed Roblox Luau game systems, and cyber-amber glassmorphism applications.
+                    </p>
+
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                        <button onclick="openBookingModal()" class="px-7 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 via-yellow-500 to-purple-600 text-black shadow-xl shadow-amber-500/25 hover:scale-105 transition-all flex items-center gap-2 uppercase">
+                            Submit Booking <i class="fa-solid fa-paper-plane text-xs text-black"></i>
+                        </button>
+                        <a href="https://github.com/arnavjalwekar4-code" target="_blank" onclick="playSfx('click')" class="px-7 py-3.5 rounded-xl font-bold text-sm cyber-glass border border-purple-800 text-amber-200 hover:text-white hover:border-amber-400 transition-all flex items-center gap-2 uppercase">
+                            <i class="fa-brands fa-github text-lg text-amber-400"></i> GitHub Repos
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right 3D Tilt Card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md animate-float">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-amber-400 via-yellow-500 to-purple-600 rounded-3xl blur-xl opacity-40"></div>
+                        <div class="tilt-card relative cyber-glass rounded-3xl p-8 border border-amber-500/30 shadow-2xl cursor-pointer" onmouseenter="playSfx('hover')">
+                            
+                            <div class="flex items-center gap-4 mb-6 border-b border-purple-900/60 pb-6">
+                                <div class="relative w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-400 to-purple-600 p-[2px] shadow-lg">
+                                    <div class="w-full h-full bg-cyberDark rounded-[14px] overflow-hidden flex items-center justify-center">
+                                        <img src="logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                        <span class="hidden font-mono-code text-amber-400 font-bold text-xl">AJ</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-xl text-white">Arnav Jalwekar</h3>
+                                    <p class="text-xs font-mono-code text-amber-400">@arnavjalwekar4-code</p>
+                                    <span class="inline-flex items-center gap-1.5 mt-1 px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[11px] font-mono-code">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Multi-Dev Systems
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="font-mono-code text-xs text-amber-200 bg-cyberDark/90 p-4 rounded-xl border border-purple-900/80 space-y-2">
+                                <div class="text-amber-500 flex justify-between border-b border-purple-900 pb-2 mb-2">
+                                    <span>system_kernel.py</span>
+                                    <i class="fa-solid fa-terminal text-amber-400"></i>
+                                </div>
+                                <p><span class="text-amber-400">class</span> <span class="text-purple-300">SystemArchitect</span>:</p>
+                                <p class="pl-4"><span class="text-purple-400">projects_shipped</span> = <span class="text-amber-400">100+</span></p>
+                                <p class="pl-4"><span class="text-purple-400">platforms</span> = <span class="text-amber-400">60+</span></p>
+                                <p class="pl-4"><span class="text-purple-400">hardware</span> = [<span class="text-amber-300">"ESP32"</span>, <span class="text-amber-300">"Arduino"</span>]</p>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-3 mt-6 text-center font-mono-code">
+                                <div class="bg-cyberDark/60 border border-purple-900/60 p-3 rounded-xl">
+                                    <span class="block text-xl font-extrabold text-amber-400">100+</span>
+                                    <span class="text-[10px] text-amber-300/70">Projects</span>
+                                </div>
+                                <div class="bg-cyberDark/60 border border-purple-900/60 p-3 rounded-xl">
+                                    <span class="block text-xl font-extrabold text-purple-400">60+</span>
+                                    <span class="text-[10px] text-amber-300/70">Platforms</span>
+                                </div>
+                                <div class="bg-cyberDark/60 border border-purple-900/60 p-3 rounded-xl">
+                                    <span class="block text-xl font-extrabold text-amber-300">24/7</span>
+                                    <span class="text-[10px] text-amber-300/70">Webhook</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ANIMATED STATS SECTION -->
+        <section id="stats" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 border-t border-purple-900/50">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center font-mono-code">
+                <div class="cyber-glass p-6 rounded-2xl border border-amber-500/20">
+                    <i class="fa-solid fa-code-commit text-3xl text-amber-400 mb-2"></i>
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white count-up" data-target="100">0</div>
+                    <p class="text-xs text-amber-400 font-bold mt-1">100+ COMPLETED PROJECTS</p>
+                </div>
+                <div class="cyber-glass p-6 rounded-2xl border border-amber-500/20">
+                    <i class="fa-solid fa-cubes text-3xl text-purple-400 mb-2"></i>
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white count-up" data-target="60">0</div>
+                    <p class="text-xs text-purple-400 font-bold mt-1">60+ PLATFORMS & TOOLS</p>
+                </div>
+                <div class="cyber-glass p-6 rounded-2xl border border-amber-500/20">
+                    <i class="fa-solid fa-microchip text-3xl text-amber-300 mb-2"></i>
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white count-up" data-target="25">0</div>
+                    <p class="text-xs text-amber-300 font-bold mt-1">IoT HARDWARE BUILDS</p>
+                </div>
+                <div class="cyber-glass p-6 rounded-2xl border border-amber-500/20">
+                    <i class="fa-solid fa-users text-3xl text-purple-300 mb-2"></i>
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white count-up" data-target="100">0</div>
+                    <p class="text-xs text-purple-300 font-bold mt-1">SYSTEM UPTIME %</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TECH ECOSYSTEMS -->
+        <section id="skills" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 border-t border-purple-900/50">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-amber-400 text-xs font-mono-code font-bold tracking-widest uppercase">TECHNICAL ECOSYSTEMS</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">60+ Integrations & Skills</h2>
+                <p class="text-amber-200/70 text-sm sm:text-base">Custom firmware, web dashboards, Luau physics engines, and Python Discord bot integrations.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="tilt-card cyber-glass cyber-glass-hover p-8 rounded-3xl" onmouseenter="playSfx('hover')">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-6"><i class="fa-brands fa-python"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Python AI & Discord Automation</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Asynchronous Discord bots using `discord.py`, Gemini AI models, Streamlit web apps, and automated Webhook telemetry dispatchers.</p>
+                </div>
+                <div class="tilt-card cyber-glass cyber-glass-hover p-8 rounded-3xl" onmouseenter="playSfx('hover')">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6"><i class="fa-solid fa-microchip"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">ESP32 & Embedded IoT</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Low-level microcontrollers (ESP32, ESP8266, Arduino Uno), soil sensors, multiplexers, servo actuators, and OLED displays.</p>
+                </div>
+                <div class="tilt-card cyber-glass cyber-glass-hover p-8 rounded-3xl" onmouseenter="playSfx('hover')">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-300 text-2xl mb-6"><i class="fa-solid fa-gamepad"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Roblox Studio & Luau Engines</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Advanced Roblox Luau scripts, vehicle suspension chassis tuning, neck-tracking procedural NPCs, and custom game admin suites.</p>
+                </div>
+                <div class="tilt-card cyber-glass cyber-glass-hover p-8 rounded-3xl" onmouseenter="playSfx('hover')">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-300 text-2xl mb-6"><i class="fa-brands fa-react"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Full-Stack Cyber Web Apps</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Designing responsive glassmorphic web dashboards, Tailwind CSS layouts, Web Audio API engines, and interactive calculators.</p>
+                </div>
+                <div class="tilt-card cyber-glass cyber-glass-hover p-8 rounded-3xl" onmouseenter="playSfx('hover')">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-6"><i class="fa-solid fa-cloud-bolt"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Cloud IoT & Telemetry</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Real-time data synchronization between physical microcontrollers and online databases using Firebase and Blynk IoT services.</p>
+                </div>
+                <div class="tilt-card cyber-glass cyber-glass-hover p-8 rounded-3xl" onmouseenter="playSfx('hover')">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6"><i class="fa-solid fa-network-wired"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Networking & NVR Cameras</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">ONVIF camera protocol setup, Uniarch NVR network integrations, local system diagnostics, and CLI automation tools.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- PROJECTS SHOWCASE -->
+        <section id="projects" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 border-t border-purple-900/50">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div class="space-y-4">
+                    <span class="text-amber-400 text-xs font-mono-code font-bold tracking-widest uppercase">PORTFOLIO SHOWCASE</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">100+ Shipped Projects</h2>
+                </div>
+                <a href="https://github.com/arnavjalwekar4-code" target="_blank" onclick="playSfx('click')" class="inline-flex items-center gap-2 text-sm font-mono-code text-amber-400 hover:text-amber-300 transition-colors uppercase">
+                    View Repositories <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between" onmouseenter="playSfx('hover')">
+                    <div class="space-y-4">
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono-code">ESP32 • IOT</span>
+                        <h3 class="text-2xl font-bold text-white">Project F.L.O.W.</h3>
+                        <p class="text-amber-200/70 text-sm leading-relaxed">Automated agricultural IoT station using multi-zone soil sensors, water diverter servo, and Firebase web dashboard.</p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-purple-900/60 flex items-center justify-between font-mono-code text-xs">
+                        <span class="text-amber-400">Status: Deployed</span>
+                        <button onclick="openBookingModal('Project F.L.O.W.')" class="text-purple-400 hover:underline uppercase">Submit Booking &rarr;</button>
+                    </div>
+                </div>
+
+                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between" onmouseenter="playSfx('hover')">
+                    <div class="space-y-4">
+                        <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono-code">PYTHON • AI</span>
+                        <h3 class="text-2xl font-bold text-white">Luna.ai & Sizzle Engine</h3>
+                        <p class="text-amber-200/70 text-sm leading-relaxed">Intelligent desktop/web AI assistant application with system automation and Gemini API integration.</p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-purple-900/60 flex items-center justify-between font-mono-code text-xs">
+                        <span class="text-purple-300">Status: Active</span>
+                        <button onclick="openBookingModal('Luna.ai Engine')" class="text-purple-400 hover:underline uppercase">Submit Booking &rarr;</button>
+                    </div>
+                </div>
+
+                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between" onmouseenter="playSfx('hover')">
+                    <div class="space-y-4">
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono-code">ROBLOX LUAU</span>
+                        <h3 class="text-2xl font-bold text-white">Roblox Vehicle & Admin Systems</h3>
+                        <p class="text-amber-200/70 text-sm leading-relaxed">Custom Luau frameworks featuring dynamic vehicle physics, cinematic simulation, and admin moderation panels.</p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-purple-900/60 flex items-center justify-between font-mono-code text-xs">
+                        <span class="text-amber-300">Status: Live</span>
+                        <button onclick="openBookingModal('Roblox Luau System')" class="text-purple-400 hover:underline uppercase">Submit Booking &rarr;</button>
+                    </div>
+                </div>
+
+                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between" onmouseenter="playSfx('hover')">
+                    <div class="space-y-4">
+                        <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono-code">WEB • APP</span>
+                        <h3 class="text-2xl font-bold text-white">ChemNumericals Platform</h3>
+                        <p class="text-amber-200/70 text-sm leading-relaxed">Web tool designed for rapid calculation of physical chemistry numericals and NCERT stoichiometry problems.</p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-purple-900/60 flex items-center justify-between font-mono-code text-xs">
+                        <span class="text-purple-300">Status: Published</span>
+                        <button onclick="openBookingModal('ChemNumericals Web Engine')" class="text-purple-400 hover:underline uppercase">Submit Booking &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- INTERACTIVE CLI TERMINAL -->
+        <section id="terminal" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 border-t border-purple-900/50">
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+                <span class="text-amber-400 text-xs font-mono-code font-bold tracking-widest uppercase">INTERACTIVE CONSOLE</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Cyber Terminal Console</h2>
+            </div>
+            <div class="max-w-4xl mx-auto cyber-glass rounded-2xl border border-amber-500/30 overflow-hidden shadow-2xl">
+                <div class="bg-cyberDark/90 px-4 py-3 border-b border-purple-900/60 flex items-center justify-between font-mono-code text-xs text-amber-400">
+                    <span class="text-amber-300">arnav@cyber-amber-kernel:~$</span>
+                </div>
+                <div id="terminal-body" class="p-6 font-mono-code text-xs text-amber-100 h-80 overflow-y-auto space-y-3 bg-cyberDark/80">
+                    <p class="text-amber-500/80">Type <span class="text-amber-400 font-bold">'help'</span> to list commands.</p>
+                </div>
+                <div class="bg-cyberDark/95 px-4 py-3 border-t border-purple-900/60 flex items-center gap-2 font-mono-code text-xs">
+                    <span class="text-amber-400 font-bold">&gt;</span>
+                    <input id="terminal-input" type="text" autocomplete="off" placeholder="Type command..." class="w-full bg-transparent text-white focus:outline-none" onkeydown="handleTerminalCommand(event)">
+                </div>
+            </div>
+        </section>
+
+
+        <!-- DISCORD WEBHOOK COMMUNITY SECTION -->
+        <section id="community" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 border-t border-purple-900/50">
+            <div class="cyber-glass rounded-3xl p-8 sm:p-14 border border-amber-500/40 text-center relative overflow-hidden shadow-2xl">
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <span class="text-amber-400 text-xs font-mono-code font-bold tracking-widest uppercase">DISCORD WEBHOOK INTEGRATION</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Direct Channel Webhook Integration</h2>
+                    <p class="text-amber-200/80 text-sm sm:text-base leading-relaxed">
+                        Every project booking inquiry sent from this website instantly dispatches a rich JSON payload to my personal Discord channel!
+                    </p>
+                    <button onclick="openBookingModal()" class="px-8 py-4 rounded-xl font-mono-code font-bold text-xs bg-amber-400 text-black hover:bg-amber-300 transition-all uppercase shadow-lg shadow-amber-400/20">
+                        Submit Booking
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="border-t border-purple-900/60 py-12 text-center text-amber-400/60 text-xs font-mono-code">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <span class="text-white font-bold">Arnav Jalwekar</span>
+            <p>© 2026 Arnav Jalwekar. Built with Electric Gold & Deep Violet Glassmorphism UI.</p>
+        </div>
+    </footer>
+
+
+    <!-- BOOKING MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-[90] flex items-center justify-center px-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="cyber-glass rounded-3xl max-w-lg w-full p-8 relative shadow-2xl border border-amber-500/40">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-amber-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="mb-6 space-y-2">
+                <h3 class="text-2xl font-extrabold text-white">Book a Project / Inquiry</h3>
+                <p class="text-xs font-mono-code text-amber-400">Dispatches instantly to Discord.</p>
+            </div>
+            <form onsubmit="handleDiscordSubmit(event)" class="space-y-4 font-mono-code text-xs">
+                <div>
+                    <label class="block text-amber-300/80 mb-1">YOUR NAME *</label>
+                    <input id="form-name" type="text" required class="w-full bg-cyberDark border border-purple-900 rounded-xl px-4 py-3 text-white focus:border-amber-400 focus:outline-none" placeholder="Name">
+                </div>
+                <div>
+                    <label class="block text-amber-300/80 mb-1">EMAIL *</label>
+                    <input id="form-email" type="email" required class="w-full bg-cyberDark border border-purple-900 rounded-xl px-4 py-3 text-white focus:border-amber-400 focus:outline-none" placeholder="email@domain.com">
+                </div>
+                <div>
+                    <label class="block text-amber-300/80 mb-1">PROJECT SCOPE *</label>
+                    <textarea id="form-message" rows="3" required class="w-full bg-cyberDark border border-purple-900 rounded-xl px-4 py-3 text-white focus:border-amber-400 focus:outline-none resize-none" placeholder="Requirements..."></textarea>
+                </div>
+                <button type="submit" id="form-submit-btn" class="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-amber-400 to-purple-600 text-black uppercase shadow-lg">
+                    Submit Booking
+                </button>
+            </form>
+            <div id="form-status" class="hidden mt-4 p-4 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 text-center font-mono-code text-xs">
+                ✔ TRANSMISSION SENT TO DISCORD!
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT & AUDIO ENGINE -->
+    <script>
+        // Custom Coding Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursor-dot');
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+
+        // Web Audio SFX Engine
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSfx(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, now);
+                osc.frequency.exponentialRampToValueAtTime(440, now + 0.08);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                osc.start(now); osc.stop(now + 0.08);
+            } else if (type === 'hover') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.04);
+                gain.gain.setValueAtTime(0.04, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.04);
+                osc.start(now); osc.stop(now + 0.04);
+            } else if (type === 'success') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
+            }
+        }
+
+        // Live Telemetry Clock & Weather
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('user-time').innerText = now.toLocaleTimeString('en-US', { hour12: true });
+            document.getElementById('user-date').innerText = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).toUpperCase();
+        }
+
+        async function fetchTelemetry() {
+            setInterval(updateClock, 1000);
+            updateClock();
+            try {
+                const ipRes = await fetch('https://ipapi.co/json/');
+                if (ipRes.ok) {
+                    const data = await ipRes.json();
+                    document.getElementById('user-ip').innerText = data.ip || '127.0.0.1';
+                    document.getElementById('user-location').innerText = `${data.city || 'Nagpur'}, ${data.country_code || 'IN'}`;
+                    if (data.latitude && data.longitude) {
+                        const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${data.latitude}&longitude=${data.longitude}&current_weather=true`);
+                        if (wRes.ok) {
+                            const wData = await wRes.json();
+                            document.getElementById('user-weather').innerText = `${wData.current_weather.temperature}°C`;
+                        }
+                    }
+                }
+            } catch (e) {
+                document.getElementById('user-ip').innerText = '103.211.54.12';
+                document.getElementById('user-location').innerText = 'Nagpur, IN';
+                document.getElementById('user-weather').innerText = '29.5°C';
+            }
+        }
+        fetchTelemetry();
+
+        // 0-100% Loader simulation
+        let loadProgress = 0;
+        const loaderBar = document.getElementById('loader-bar');
+        const loaderPercentage = document.getElementById('loader-percentage');
+        const loaderStatus = document.getElementById('loader-status');
+        const enterBtn = document.getElementById('enter-btn');
+
+        const loadingInterval = setInterval(() => {
+            loadProgress += Math.floor(Math.random() * 8) + 4;
+            if (loadProgress >= 100) {
+                loadProgress = 100;
+                clearInterval(loadingInterval);
+                loaderStatus.innerText = "SYSTEM KERNEL READY — SATELLITE LINK ESTABLISHED";
+                enterBtn.classList.remove('hidden');
+            }
+            loaderBar.style.width = loadProgress + '%';
+            loaderPercentage.innerText = loadProgress + '%';
+        }, 35);
+
+        function initializePortfolio() {
+            playSfx('success');
+            document.getElementById('loading-screen').classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => toggleMusic(), 500);
+            startCounters();
+        }
+
+        // Background Audio ("Mala Slowed")
+        let bgAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=synthwave-80s-110045.mp3");
+        bgAudio.loop = true;
+        let isPlaying = false;
+
+        function toggleMusic() {
+            playSfx('click');
+            const eq = document.getElementById('eq-container');
+            const playIcon = document.getElementById('play-icon');
+            if (isPlaying) {
+                bgAudio.pause();
+                isPlaying = false;
+                eq.classList.add('paused');
+                playIcon.className = 'fa-solid fa-play';
+            } else {
+                bgAudio.play().then(() => {
+                    isPlaying = true;
+                    eq.classList.remove('paused');
+                    playIcon.className = 'fa-solid fa-pause';
+                }).catch(() => {});
+            }
+        }
+
+        function toggleMute() {
+            playSfx('click');
+            bgAudio.muted = !bgAudio.muted;
+            document.getElementById('mute-icon').className = bgAudio.muted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+        }
+
+        // Matrix Rain Canvas
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        const chars = '0123456789ABCDEFESP32LUAUROBLOXPYTHON';
+        const fontSize = 12;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = Array(columns).fill(1);
+        setInterval(() => {
+            ctx.fillStyle = 'rgba(10, 5, 24, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fbbf24';
+            ctx.font = `${fontSize}px Fira Code`;
+            for (let i = 0; i < drops.length; i++) {
+                ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }, 33);
+
+        // Typing Effect
+        const words = ["Python AI & Bots.", "100+ Shipped Projects.", "ESP32 IoT Hardware.", "Roblox Luau Physics."];
+        let wordIdx = 0, charIdx = 0, isDeleting = false;
+        const typingElement = document.getElementById('typing-text');
+        function typeLoop() {
+            const currentWord = words[wordIdx];
+            if (isDeleting) charIdx--; else charIdx++;
+            typingElement.innerText = currentWord.substring(0, charIdx);
+            let speed = isDeleting ? 40 : 80;
+            if (!isDeleting && charIdx === currentWord.length) { speed = 2000; isDeleting = true; }
+            else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; speed = 500; }
+            setTimeout(typeLoop, speed);
+        }
+        typeLoop();
+
+        // Counters
+        function startCounters() {
+            document.querySelectorAll('.count-up').forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const update = () => {
+                    count += Math.ceil(target / 40);
+                    if (count < target) { counter.innerText = count + '+'; setTimeout(update, 40); }
+                    else { counter.innerText = target + '+'; }
+                };
+                update();
+            });
+        }
+
+        // Discord Webhook with hidden user ID ping
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1561631554344591392/JUgnUf4toir9f5mdo7g-jwIyMdofNoV-2-d_R7e34Gzzg5PRu0Hceb4wNkADlT2D8ZJI";
+        const TARGET_PING_USER_ID = "1469928466106548245";
+
+        async function handleDiscordSubmit(e) {
+            e.preventDefault();
+            playSfx('click');
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            const message = document.getElementById('form-message').value;
+            const btn = document.getElementById('form-submit-btn');
+            const statusBox = document.getElementById('form-status');
+
+            btn.disabled = true;
+            btn.innerText = "SUBMITTING...";
+
+            const payload = {
+                content: `<@${TARGET_PING_USER_ID}> 🔔 **NEW BOOKING SUBMITTED!**`,
+                username: "Arnav Portfolio Bot",
+                embeds: [{
+                    title: "⚡ New Booking Inquiry",
+                    color: 16502280,
+                    fields: [
+                        { name: "👤 Name", value: name, inline: true },
+                        { name: "📧 Email", value: email, inline: true },
+                        { name: "📝 Scope", value: message }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                playSfx('success');
+                statusBox.classList.remove('hidden');
+                e.target.reset();
+                setTimeout(() => closeBookingModal(), 3000);
+            } catch (err) {
+                alert("Transmission error.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Submit Booking";
+            }
+        }
+
+        function handleTerminalCommand(e) {
+            if (e.key === 'Enter') {
+                const input = e.target.value.trim().toLowerCase();
+                const body = document.getElementById('terminal-body');
+                playSfx('click');
+                const cmdLine = document.createElement('p');
+                cmdLine.className = 'text-amber-400 font-bold';
+                cmdLine.innerText = `arnav@cyber-amber-kernel:~$ ${e.target.value}`;
+                body.appendChild(cmdLine);
+
+                let resp = input === 'help' ? 'Commands: help, stats, projects, book, clear' :
+                           input === 'stats' ? '100+ Projects | 60+ Platforms Active' :
+                           input === 'book' ? (openBookingModal(), 'Opening booking modal...') :
+                           `Command not recognized: ${input}`;
+
+                const respLine = document.createElement('p');
+                respLine.className = 'text-amber-200/80';
+                respLine.innerText = resp;
+                body.appendChild(respLine);
+                e.target.value = '';
+                body.scrollTop = body.scrollHeight;
+            }
+        }
+
+        function openBookingModal(projectName = '') {
+            playSfx('click');
+            if (projectName) {
+                document.getElementById('form-message').value = `Inquiry regarding ${projectName}: `;
+            }
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            playSfx('click');
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            playSfx('click');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -922,6 +922,7 @@
         bgAudio.loop = true;
         let sfxAudio = new Audio("lol.mp4");
         let isPlaying = false;
+        let userPausedExplicitly = false;
 
         function initializePortfolio() {
             // 1. Play lol.mp4 SFX instantly on click
@@ -956,6 +957,7 @@
                 // Start background music stream automatically after flash
                 bgAudio.play().then(() => {
                     isPlaying = true;
+                    userPausedExplicitly = false;
                     document.getElementById('eq-container').classList.remove('paused');
                     document.getElementById('play-icon').className = 'fa-solid fa-pause';
                 }).catch(() => {});
@@ -965,23 +967,22 @@
             startCounters();
         }
 
-        // Auto-pause background music when switching tabs or leaving the website
+        // Auto-pause when leaving tab, auto-resume when coming back
         document.addEventListener('visibilitychange', () => {
-            if (document.hidden && isPlaying) {
-                bgAudio.pause();
-                document.getElementById('eq-container').classList.add('paused');
-                document.getElementById('play-icon').className = 'fa-solid fa-play';
-                isPlaying = false;
+            if (document.hidden) {
+                if (isPlaying) {
+                    bgAudio.pause();
+                    document.getElementById('eq-container').classList.add('paused');
+                    document.getElementById('play-icon').className = 'fa-solid fa-play';
+                }
+            } else {
+                if (isPlaying && !userPausedExplicitly) {
+                    bgAudio.play().then(() => {
+                        document.getElementById('eq-container').classList.remove('paused');
+                        document.getElementById('play-icon').className = 'fa-solid fa-pause';
+                    }).catch(() => {});
+                }
             }
-        });
-
-        window.addEventListener('pagehide', () => {
-            bgAudio.pause();
-            sfxAudio.pause();
-        });
-        window.addEventListener('beforeunload', () => {
-            bgAudio.pause();
-            sfxAudio.pause();
         });
 
         function toggleMusic() {
@@ -991,11 +992,13 @@
             if (isPlaying) {
                 bgAudio.pause();
                 isPlaying = false;
+                userPausedExplicitly = true;
                 eq.classList.add('paused');
                 playIcon.className = 'fa-solid fa-play';
             } else {
                 bgAudio.play().then(() => {
                     isPlaying = true;
+                    userPausedExplicitly = false;
                     eq.classList.remove('paused');
                     playIcon.className = 'fa-solid fa-pause';
                 }).catch(() => {});

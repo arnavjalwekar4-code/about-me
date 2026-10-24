@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arnav Jalwekar — Cyber-Amber Systems Architect</title>
-    <meta name="description" content="Arnav Jalwekar — developer specializing in game engineering, Python, Java, C++, automation, and modern web interfaces.">
+    <meta name="description" content="Arnav Jalwekar — developer specializing in game engineering, Python, Node.js, cybersecurity, databases, Arduino, and ESP32 hardware.">
 
     <!-- Favicon: browser tab, bookmarks, and Google Search icon -->
     <link rel="icon" type="image/png" sizes="512x512" href="./favicon.png">
@@ -13,7 +13,7 @@
 
     <!-- Link previews -->
     <meta property="og:title" content="Arnav Jalwekar — Cyber-Amber Systems Architect">
-    <meta property="og:description" content="Developer specializing in game engineering, Python, Java, C++, automation, and modern web interfaces.">
+    <meta property="og:description" content="Developer specializing in game engineering, Python, Node.js, cybersecurity, databases, Arduino, and ESP32 hardware.">
     <meta property="og:image" content="https://arnavjalwekar4-code.github.io/about-me/logo.png">
     <meta property="og:url" content="https://arnavjalwekar4-code.github.io/about-me/">
     <meta name="twitter:card" content="summary">
@@ -141,6 +141,43 @@
             box-shadow: 0 20px 40px -10px rgba(251, 191, 36, 0.35), 0 0 25px rgba(168, 85, 247, 0.35);
         }
 
+        /* Premium Cyber Button Animations & Icon Rotation on Hover */
+        .cyber-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+
+        .cyber-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4), 0 0 30px rgba(168, 85, 247, 0.3);
+        }
+
+        .cyber-btn:active {
+            transform: translateY(1px) scale(0.96) !important;
+        }
+
+        /* Rotate icon on button hover */
+        .cyber-btn:hover i, button:hover i, a.group:hover i {
+            transform: rotate(20deg) scale(1.2);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
         /* Scanline Mask */
         .scanline-mask {
             background: linear-gradient(
@@ -174,14 +211,6 @@
             animation-play-state: paused;
             transform: scaleY(0.2);
             background: #a855f7;
-        }
-
-        /* Button Press Animation */
-        button, a.group {
-            transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
-        }
-        button:active, a.group:active {
-            transform: scale(0.95) !important;
         }
 
         /* Custom Scrollbar */
@@ -280,10 +309,10 @@
             </div>
 
             <!-- Launch Button (Hidden until 100%) -->
-            <button id="enter-btn" onclick="initializePortfolio()" class="hidden relative group w-full py-4 rounded-xl font-mono-code font-bold text-sm uppercase tracking-widest text-black overflow-hidden shadow-lg shadow-amber-500/25 border border-amber-400 hover:border-amber-300 transition-all duration-300 transform hover:scale-[1.02] active:scale-95">
-                <span class="absolute inset-0 bg-gradient-to-r from-amber-400 via-amber-500 to-purple-500 opacity-90 group-hover:opacity-100 transition-opacity"></span>
+            <button id="enter-btn" onclick="initializePortfolio()" class="cyber-btn hidden relative group w-full py-4 rounded-xl font-mono-code font-bold text-sm uppercase tracking-widest text-black shadow-lg shadow-amber-500/25 border border-amber-400">
+                <span class="absolute inset-0 bg-gradient-to-r from-amber-400 via-yellow-400 to-purple-500 opacity-90 group-hover:opacity-100 transition-opacity"></span>
                 <span class="relative z-10 flex items-center justify-center gap-2 font-extrabold text-black">
-                    <i class="fa-solid fa-power-off text-black group-hover:scale-125 transition-transform"></i> ENTER SYSTEM & PLAY AUDIO
+                    <i class="fa-solid fa-power-off text-black"></i> ENTER SYSTEM & PLAY AUDIO
                 </span>
             </button>
         </div>
@@ -294,10 +323,8 @@
     <!-- 2-SECOND CINEMATIC FLASH & SHOCKWAVE OVERLAY -->
     <!-- ========================================== -->
     <div id="flash-overlay" class="fixed inset-0 z-[110] bg-gradient-to-tr from-amber-300 via-white to-purple-400 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center overflow-hidden">
-        <!-- Expanding Neon Shockwave Ring -->
         <div id="shockwave-ring" class="absolute w-32 h-32 rounded-full border-amber-400 scale-0 pointer-events-none"></div>
         
-        <!-- Headphones Notification Card -->
         <div id="headphones-msg" class="opacity-0 scale-75 transition-all duration-500 cyber-glass border-2 border-amber-400 px-10 py-8 rounded-3xl text-center shadow-[0_0_50px_rgba(251,191,36,0.6)] space-y-4 max-w-lg mx-4">
             <div class="w-16 h-16 rounded-2xl bg-amber-500/20 border border-amber-400/50 mx-auto flex items-center justify-center text-amber-400 text-3xl shadow-lg animate-bounce">
                 <i class="fa-solid fa-headphones"></i>
@@ -357,7 +384,11 @@
                 <a href="#skills" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">Ecosystems</a>
                 <a href="#projects" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">Projects</a>
                 <a href="#terminal" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">CLI Terminal</a>
-                <a href="#community" onclick="playSfx('click')" class="hover:text-amber-400 transition-colors">Teams</a>
+                
+                <!-- Animated Team Header Button -->
+                <button onclick="openTeamModal()" class="cyber-btn px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-400/40 text-amber-300 font-bold flex items-center gap-1.5 shadow-md hover:border-amber-300">
+                    <i class="fa-solid fa-users text-amber-400"></i> Team
+                </button>
             </nav>
 
             <!-- Audio Controller Widget + Booking Action -->
@@ -374,15 +405,15 @@
                         <div id="music-title" class="whitespace-nowrap truncate">music.mp4</div>
                     </div>
 
-                    <button id="play-btn" onclick="toggleMusic()" title="Play/Pause" class="w-6 h-6 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 flex items-center justify-center text-[10px] transition-colors active:scale-90">
+                    <button id="play-btn" onclick="toggleMusic()" title="Play/Pause" class="cyber-btn w-6 h-6 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-[10px]">
                         <i id="play-icon" class="fa-solid fa-play"></i>
                     </button>
-                    <button id="mute-btn" onclick="toggleMute()" title="Mute/Unmute" class="w-6 h-6 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 flex items-center justify-center text-[10px] transition-colors active:scale-90">
+                    <button id="mute-btn" onclick="toggleMute()" title="Mute/Unmute" class="cyber-btn w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center text-[10px]">
                         <i id="mute-icon" class="fa-solid fa-volume-high"></i>
                     </button>
                 </div>
 
-                <button onclick="openRulesModal()" class="hidden sm:flex px-3.5 py-1.5 rounded-xl text-xs font-mono-code font-bold bg-gradient-to-r from-amber-400 to-purple-600 text-black shadow-md shadow-amber-500/20 hover:scale-105 active:scale-95 transition-transform items-center gap-2 uppercase">
+                <button onclick="openRulesModal()" class="cyber-btn hidden sm:flex px-3.5 py-1.5 rounded-xl text-xs font-mono-code font-bold bg-gradient-to-r from-amber-400 to-purple-600 text-black shadow-md shadow-amber-500/20 items-center gap-2 uppercase">
                     <i class="fa-solid fa-calendar-check text-black"></i> Submit Booking
                 </button>
 
@@ -399,8 +430,9 @@
             <a href="#skills" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-200 hover:text-amber-400">/ecosystems</a>
             <a href="#projects" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-200 hover:text-amber-400">/projects</a>
             <a href="#terminal" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-200 hover:text-amber-400">/cli-terminal</a>
+            <button onclick="openTeamModal(); toggleMobileMenu();" class="block text-amber-400 font-bold hover:underline w-full text-left">/team (Team Members)</button>
             <a href="https://arnavjalwekar4-code.github.io/arnav-jalwekar-profile/" target="_blank" onclick="toggleMobileMenu(); playSfx('click');" class="block text-amber-400 font-bold hover:underline">/profile</a>
-            <button onclick="openRulesModal(); toggleMobileMenu();" class="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-400 to-purple-600 text-black uppercase active:scale-95 transition-transform">
+            <button onclick="openRulesModal(); toggleMobileMenu();" class="cyber-btn w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-400 to-purple-600 text-black uppercase">
                 Submit Booking
             </button>
         </div>
@@ -419,7 +451,7 @@
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono-code">
                         <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                        FULL-STACK • IOT HARDWARE • ROBOKING • AI ARCHITECT
+                        PYTHON • NODE.JS • VS CODE • CYBER SECURITY • DATABASES • GAMING • IOT
                     </div>
 
                     <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
@@ -429,22 +461,25 @@
                     </h1>
 
                     <p class="text-amber-200/80 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        I am <strong class="text-white">Arnav Jalwekar</strong> (<span class="font-mono-code text-amber-400 text-sm">@arnavjalwekar4-code</span>). Architecting Python AI engines, ESP32 microcontrollers, high-speed Roblox Luau game systems, and cyber-amber glassmorphism applications.
+                        I am <strong class="text-white">Arnav Jalwekar</strong> (<span class="font-mono-code text-amber-400 text-sm">@arnavjalwekar4-code</span>). Systems Architect specializing in Python, Node.js, VS Code tools, cybersecurity protocols, databases, game engines, Arduino, ESP32 hardware, and advanced IoT solutions.
                     </p>
 
+                    <!-- Interactive Animated Button Group -->
                     <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
-                        <button onclick="openRulesModal()" class="px-7 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 via-yellow-500 to-purple-600 text-black shadow-xl shadow-amber-500/25 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 uppercase">
+                        <button onclick="openRulesModal()" class="cyber-btn px-7 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 via-yellow-500 to-purple-600 text-black shadow-xl shadow-amber-500/25 flex items-center gap-2 uppercase">
                             Submit Booking <i class="fa-solid fa-paper-plane text-xs text-black"></i>
                         </button>
 
-                        <a href="https://github.com/arnavjalwekar4-code" target="_blank" onclick="playSfx('click')" class="px-7 py-3.5 rounded-xl font-bold text-sm cyber-glass border border-purple-800 text-amber-200 hover:text-white hover:border-amber-400 transition-all active:scale-95 flex items-center gap-2 uppercase">
-                            <i class="fa-brands fa-github text-lg text-amber-400"></i> GitHub Repos
+                        <button onclick="openTeamModal()" class="cyber-btn px-7 py-3.5 rounded-xl font-bold text-sm cyber-glass border border-amber-400/50 text-amber-300 hover:text-white flex items-center gap-2 uppercase shadow-lg shadow-amber-500/10">
+                            <i class="fa-solid fa-users text-lg text-amber-400"></i> Team
+                        </button>
+
+                        <a href="https://arnavjalwekar4-code.github.io/arnav-jalwekar-profile/" target="_blank" onclick="playSfx('click')" class="cyber-btn px-7 py-3.5 rounded-xl font-bold text-sm cyber-glass border border-amber-400/50 text-amber-300 hover:text-white flex items-center gap-2 uppercase overflow-hidden shadow-lg shadow-amber-500/20">
+                            <i class="fa-solid fa-user-astronaut text-lg text-amber-400"></i> Profile
                         </a>
 
-                        <a href="https://arnavjalwekar4-code.github.io/arnav-jalwekar-profile/" target="_blank" onclick="playSfx('click')" class="relative group px-7 py-3.5 rounded-xl font-bold text-sm cyber-glass border border-amber-400/50 text-amber-300 hover:text-white transition-all duration-300 active:scale-95 flex items-center gap-2 uppercase overflow-hidden shadow-lg shadow-amber-500/20 hover:scale-105 hover:border-amber-300 hover:shadow-amber-400/40">
-                            <span class="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-purple-500/20 to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></span>
-                            <i class="fa-solid fa-user-astronaut text-lg text-amber-400 group-hover:rotate-12 group-hover:scale-125 transition-transform duration-300"></i>
-                            <span class="relative z-10 font-mono-code font-extrabold tracking-wider">Profile</span>
+                        <a href="https://github.com/arnavjalwekar4-code" target="_blank" onclick="playSfx('click')" class="cyber-btn px-7 py-3.5 rounded-xl font-bold text-sm cyber-glass border border-purple-800 text-amber-200 hover:text-white flex items-center gap-2 uppercase">
+                            <i class="fa-brands fa-github text-lg text-amber-400"></i> GitHub Profile
                         </a>
                     </div>
                 </div>
@@ -466,7 +501,7 @@
                                     <h3 class="font-bold text-xl text-white">Arnav Jalwekar</h3>
                                     <p class="text-xs font-mono-code text-amber-400">@arnavjalwekar4-code</p>
                                     <span class="inline-flex items-center gap-1.5 mt-1 px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[11px] font-mono-code">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Multi-Dev Systems
+                                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Multi-Dev Expert
                                     </span>
                                 </div>
                             </div>
@@ -476,10 +511,10 @@
                                     <span>system_kernel.py</span>
                                     <i class="fa-solid fa-terminal text-amber-400"></i>
                                 </div>
-                                <p><span class="text-amber-400">class</span> <span class="text-purple-300">SystemArchitect</span>:</p>
-                                <p class="pl-4"><span class="text-purple-400">projects_shipped</span> = <span class="text-amber-400">100+</span></p>
-                                <p class="pl-4"><span class="text-purple-400">platforms</span> = <span class="text-amber-400">60+</span></p>
-                                <p class="pl-4"><span class="text-purple-400">hardware</span> = [<span class="text-amber-300">"ESP32"</span>, <span class="text-amber-300">"Arduino"</span>]</p>
+                                <p><span class="text-amber-400">class</span> <span class="text-purple-300">SystemsExpert</span>:</p>
+                                <p class="pl-4"><span class="text-purple-400">core</span> = [<span class="text-amber-300">"Python"</span>, <span class="text-amber-300">"Node.js"</span>]</p>
+                                <p class="pl-4"><span class="text-purple-400">hardware</span> = [<span class="text-amber-300">"Arduino"</span>, <span class="text-amber-300">"ESP32"</span>]</p>
+                                <p class="pl-4"><span class="text-purple-400">domains</span> = [<span class="text-amber-300">"Cybersecurity"</span>, <span class="text-amber-300">"Gaming"</span>]</p>
                             </div>
 
                             <div class="grid grid-cols-3 gap-3 mt-6 text-center font-mono-code">
@@ -489,11 +524,11 @@
                                 </div>
                                 <div class="bg-cyberDark/60 border border-purple-900/60 p-3 rounded-xl">
                                     <span class="block text-xl font-extrabold text-purple-400">60+</span>
-                                    <span class="text-[10px] text-amber-300/70">Platforms</span>
+                                    <span class="text-[10px] text-amber-300/70">Tools</span>
                                 </div>
                                 <div class="bg-cyberDark/60 border border-purple-900/60 p-3 rounded-xl">
                                     <span class="block text-xl font-extrabold text-amber-300">24/7</span>
-                                    <span class="text-[10px] text-amber-300/70">Webhook</span>
+                                    <span class="text-[10px] text-amber-300/70">Active</span>
                                 </div>
                             </div>
 
@@ -514,14 +549,14 @@
                     <p class="text-xs text-amber-400 font-bold mt-1">100+ COMPLETED PROJECTS</p>
                 </div>
                 <div class="tilt-card cyber-glass p-6 rounded-2xl border border-amber-500/20">
-                    <i class="fa-solid fa-cubes text-3xl text-purple-400 mb-2"></i>
+                    <i class="fa-solid fa-shield-halved text-3xl text-purple-400 mb-2"></i>
                     <div class="text-3xl sm:text-4xl font-extrabold text-white count-up" data-target="60">0</div>
-                    <p class="text-xs text-purple-400 font-bold mt-1">60+ PLATFORMS & TOOLS</p>
+                    <p class="text-xs text-purple-400 font-bold mt-1">60+ TOOLS & PLATFORMS</p>
                 </div>
                 <div class="tilt-card cyber-glass p-6 rounded-2xl border border-amber-500/20">
                     <i class="fa-solid fa-microchip text-3xl text-amber-300 mb-2"></i>
                     <div class="text-3xl sm:text-4xl font-extrabold text-white count-up" data-target="25">0</div>
-                    <p class="text-xs text-amber-300 font-bold mt-1">IoT HARDWARE BUILDS</p>
+                    <p class="text-xs text-amber-300 font-bold mt-1">HARDWARE BUILDS</p>
                 </div>
                 <div class="tilt-card cyber-glass p-6 rounded-2xl border border-amber-500/20">
                     <i class="fa-solid fa-users text-3xl text-purple-300 mb-2"></i>
@@ -532,45 +567,112 @@
         </section>
 
 
-        <!-- TECH ECOSYSTEMS -->
-        <section id="skills" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 border-t border-purple-900/50">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="text-amber-400 text-xs font-mono-code font-bold tracking-widest uppercase">TECHNICAL ECOSYSTEMS</span>
-                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">60+ Integrations & Skills</h2>
-                <p class="text-amber-200/70 text-sm sm:text-base">Custom firmware, web dashboards, Luau physics engines, and Python Discord bot integrations.</p>
+        <!-- HIGH-TECH VIBRANT ECOSYSTEMS / SKILLS SECTION -->
+        <section id="skills" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 border-t border-purple-900/50 relative overflow-hidden">
+            <div class="absolute top-1/3 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 relative z-10">
+                <span class="text-amber-400 text-xs font-mono-code font-bold tracking-widest uppercase px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30">
+                    TECHNICAL ECOSYSTEMS
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Advanced Domains & Expert Skills</h2>
+                <p class="text-amber-200/70 text-sm sm:text-base">Custom firmware, server backends, cybersecurity tools, databases, Luau engines, and IoT hardware.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="tilt-card cyber-glass p-8 rounded-3xl cursor-pointer" onmouseenter="playSfx('hover')">
-                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-6"><i class="fa-brands fa-python"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Python AI & Discord Automation</h3>
-                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Asynchronous Discord bots using `discord.py`, Gemini AI models, Streamlit web apps, and automated Webhook telemetry dispatchers.</p>
+            <!-- Enhanced Vibrant Glass Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+                
+                <!-- Card 1: Python & Node.js -->
+                <div class="tilt-card cyber-glass p-8 rounded-3xl relative group overflow-hidden border border-amber-500/30 hover:border-amber-400 transition-all cursor-pointer shadow-xl" onmouseenter="playSfx('hover')">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-amber-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500/20 to-yellow-400/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-3xl mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fa-brands fa-python"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 text-white group-hover:text-amber-300 transition-colors">Python & Node.js Backend</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Asynchronous Python & Node.js backend engines, Discord automation bots, REST APIs, and Gemini AI integrations.</p>
+                    <div class="flex flex-wrap gap-2 font-mono-code text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300">Python 3.11</span>
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-300">Node.js</span>
+                        <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">Asyncio</span>
+                    </div>
                 </div>
-                <div class="tilt-card cyber-glass p-8 rounded-3xl cursor-pointer" onmouseenter="playSfx('hover')">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6"><i class="fa-solid fa-microchip"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">ESP32 & Embedded IoT</h3>
-                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Low-level microcontrollers (ESP32, ESP8266, Arduino Uno), soil sensors, multiplexers, servo actuators, and OLED displays.</p>
+
+                <!-- Card 2: Arduino & ESP32 -->
+                <div class="tilt-card cyber-glass p-8 rounded-3xl relative group overflow-hidden border border-purple-900/60 hover:border-purple-500 transition-all cursor-pointer shadow-xl" onmouseenter="playSfx('hover')">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-purple-600/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-500/20 to-purple-400/20 border border-purple-400/40 flex items-center justify-center text-purple-400 text-3xl mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 text-white group-hover:text-purple-300 transition-colors">Arduino & ESP32 Hardware</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Expert in low-level microcontrollers, Arduino Uno, ESP32/ESP8266 Wi-Fi modules, sensors, and actuators.</p>
+                    <div class="flex flex-wrap gap-2 font-mono-code text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-300">Arduino C++</span>
+                        <span class="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300">ESP32 DevKit</span>
+                        <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">I2C / SPI</span>
+                    </div>
                 </div>
-                <div class="tilt-card cyber-glass p-8 rounded-3xl cursor-pointer" onmouseenter="playSfx('hover')">
-                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-300 text-2xl mb-6"><i class="fa-solid fa-gamepad"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Roblox Studio & Luau Engines</h3>
-                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Advanced Roblox Luau scripts, vehicle suspension chassis tuning, neck-tracking procedural NPCs, and custom game admin suites.</p>
+
+                <!-- Card 3: Gaming & Roblox -->
+                <div class="tilt-card cyber-glass p-8 rounded-3xl relative group overflow-hidden border border-amber-500/30 hover:border-amber-400 transition-all cursor-pointer shadow-xl" onmouseenter="playSfx('hover')">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-yellow-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500/20 to-yellow-300/20 border border-amber-400/40 flex items-center justify-center text-amber-300 text-3xl mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 text-white group-hover:text-amber-300 transition-colors">Gaming & Roblox Luau</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Game architecture, high-performance Roblox Luau physics engines, vehicle simulation, and custom admin suites.</p>
+                    <div class="flex flex-wrap gap-2 font-mono-code text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300">Luau Scripting</span>
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-300">Roblox Studio</span>
+                        <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">Chassis Physics</span>
+                    </div>
                 </div>
-                <div class="tilt-card cyber-glass p-8 rounded-3xl cursor-pointer" onmouseenter="playSfx('hover')">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-300 text-2xl mb-6"><i class="fa-brands fa-react"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Full-Stack Cyber Web Apps</h3>
-                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Designing responsive glassmorphic web dashboards, Tailwind CSS layouts, Web Audio API engines, and interactive calculators.</p>
+
+                <!-- Card 4: Cybersecurity & VS Code -->
+                <div class="tilt-card cyber-glass p-8 rounded-3xl relative group overflow-hidden border border-purple-900/60 hover:border-purple-500 transition-all cursor-pointer shadow-xl" onmouseenter="playSfx('hover')">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-purple-600/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-500/20 to-indigo-400/20 border border-purple-400/40 flex items-center justify-center text-purple-300 text-3xl mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 text-white group-hover:text-purple-300 transition-colors">Cyber Security & VS Code</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Penetration testing fundamentals, security audits, encrypted webhook telemetry, and custom VS Code environment tooling.</p>
+                    <div class="flex flex-wrap gap-2 font-mono-code text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-300">Security Audits</span>
+                        <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">VS Code IDE</span>
+                        <span class="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300">Encrypted Hooks</span>
+                    </div>
                 </div>
-                <div class="tilt-card cyber-glass p-8 rounded-3xl cursor-pointer" onmouseenter="playSfx('hover')">
-                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-6"><i class="fa-solid fa-cloud-bolt"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Cloud IoT & Telemetry</h3>
-                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Real-time data synchronization between physical microcontrollers and online databases using Firebase and Blynk IoT services.</p>
+
+                <!-- Card 5: Database Architecture -->
+                <div class="tilt-card cyber-glass p-8 rounded-3xl relative group overflow-hidden border border-amber-500/30 hover:border-amber-400 transition-all cursor-pointer shadow-xl" onmouseenter="playSfx('hover')">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-amber-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500/20 to-orange-400/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-3xl mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 text-white group-hover:text-amber-300 transition-colors">Database Architecture</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Secure data storage solutions, Firebase real-time sync, SQL/NoSQL database management, and cloud logging pipelines.</p>
+                    <div class="flex flex-wrap gap-2 font-mono-code text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300">Firebase RTDB</span>
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-300">SQL & NoSQL</span>
+                        <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">Cloud Sync</span>
+                    </div>
                 </div>
-                <div class="tilt-card cyber-glass p-8 rounded-3xl cursor-pointer" onmouseenter="playSfx('hover')">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6"><i class="fa-solid fa-network-wired"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Networking & NVR Cameras</h3>
-                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">ONVIF camera protocol setup, Uniarch NVR network integrations, local system diagnostics, and CLI automation tools.</p>
+
+                <!-- Card 6: IoT Systems & Networking -->
+                <div class="tilt-card cyber-glass p-8 rounded-3xl relative group overflow-hidden border border-purple-900/60 hover:border-purple-500 transition-all cursor-pointer shadow-xl" onmouseenter="playSfx('hover')">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-cyan-600/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-500/20 to-cyan-400/20 border border-purple-400/40 flex items-center justify-center text-purple-400 text-3xl mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 text-white group-hover:text-purple-300 transition-colors">IoT Systems & Networking</h3>
+                    <p class="text-amber-200/70 text-sm leading-relaxed mb-6">Connected device networks, NVR/camera protocols, real-time sensor dashboards, and remote system telemetry.</p>
+                    <div class="flex flex-wrap gap-2 font-mono-code text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">ONVIF Protocol</span>
+                        <span class="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300">Blynk Telemetry</span>
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-300">NVR Camera Links</span>
+                    </div>
                 </div>
+
             </div>
         </section>
 
@@ -580,59 +682,71 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div class="space-y-4">
                     <span class="text-amber-400 text-xs font-mono-code font-bold tracking-widest uppercase">PORTFOLIO SHOWCASE</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">100+ Shipped Projects</h2>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Latest Projects</h2>
                 </div>
-                <a href="https://github.com/arnavjalwekar4-code" target="_blank" onclick="playSfx('click')" class="inline-flex items-center gap-2 text-sm font-mono-code text-amber-400 hover:text-amber-300 transition-colors uppercase active:scale-95">
-                    View Repositories <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                </a>
+                <div class="text-xs font-mono-code text-amber-400/80 uppercase">
+                    🔒 Repositories Protected (Profile View Only)
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between cursor-pointer" onmouseenter="playSfx('hover')">
+                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between cursor-pointer relative overflow-hidden" onmouseenter="playSfx('hover')">
+                    <div class="absolute top-4 right-4 bg-amber-400 text-black text-[10px] font-mono-code font-extrabold px-3 py-1 rounded-full uppercase shadow-lg animate-pulse">
+                        ★ NEW
+                    </div>
                     <div class="space-y-4">
-                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono-code">ESP32 • IOT</span>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono-code">ESP32 • IOT • HARDWARE</span>
                         <h3 class="text-2xl font-bold text-white">Project F.L.O.W.</h3>
-                        <p class="text-amber-200/70 text-sm leading-relaxed">Automated agricultural IoT station using multi-zone soil sensors, water diverter servo, and Firebase web dashboard.</p>
+                        <p class="text-amber-200/70 text-sm leading-relaxed">Automated agricultural IoT station using ESP32, multi-zone soil sensors, water diverter servo, and Firebase web dashboard.</p>
                     </div>
                     <div class="mt-8 pt-4 border-t border-purple-900/60 flex items-center justify-between font-mono-code text-xs">
                         <span class="text-amber-400">Status: Deployed</span>
-                        <button onclick="openRulesModal('Project F.L.O.W.')" class="text-purple-400 hover:underline uppercase active:scale-95 transition-transform">Submit Booking &rarr;</button>
+                        <button onclick="openRulesModal('Project F.L.O.W.')" class="cyber-btn text-purple-400 hover:underline uppercase">Submit Booking &rarr;</button>
                     </div>
                 </div>
 
-                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between cursor-pointer" onmouseenter="playSfx('hover')">
+                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between cursor-pointer relative overflow-hidden" onmouseenter="playSfx('hover')">
+                    <div class="absolute top-4 right-4 bg-amber-400 text-black text-[10px] font-mono-code font-extrabold px-3 py-1 rounded-full uppercase shadow-lg animate-pulse">
+                        ★ NEW
+                    </div>
                     <div class="space-y-4">
-                        <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono-code">PYTHON • AI</span>
+                        <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono-code">PYTHON • NODE.JS • AI</span>
                         <h3 class="text-2xl font-bold text-white">Luna.ai & Sizzle Engine</h3>
-                        <p class="text-amber-200/70 text-sm leading-relaxed">Intelligent desktop/web AI assistant application with system automation and Gemini API integration.</p>
+                        <p class="text-amber-200/70 text-sm leading-relaxed">Intelligent desktop/web AI assistant application with Node.js backend automation and Gemini API integration.</p>
                     </div>
                     <div class="mt-8 pt-4 border-t border-purple-900/60 flex items-center justify-between font-mono-code text-xs">
                         <span class="text-purple-300">Status: Active</span>
-                        <button onclick="openRulesModal('Luna.ai Engine')" class="text-purple-400 hover:underline uppercase active:scale-95 transition-transform">Submit Booking &rarr;</button>
+                        <button onclick="openRulesModal('Luna.ai Engine')" class="cyber-btn text-purple-400 hover:underline uppercase">Submit Booking &rarr;</button>
                     </div>
                 </div>
 
-                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between cursor-pointer" onmouseenter="playSfx('hover')">
+                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between cursor-pointer relative overflow-hidden" onmouseenter="playSfx('hover')">
+                    <div class="absolute top-4 right-4 bg-amber-400 text-black text-[10px] font-mono-code font-extrabold px-3 py-1 rounded-full uppercase shadow-lg animate-pulse">
+                        ★ NEW
+                    </div>
                     <div class="space-y-4">
-                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono-code">ROBLOX LUAU</span>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono-code">ROBLOX LUAU • GAMING</span>
                         <h3 class="text-2xl font-bold text-white">Roblox Vehicle & Admin Systems</h3>
-                        <p class="text-amber-200/70 text-sm leading-relaxed">Custom Luau frameworks featuring dynamic vehicle physics, cinematic simulation, and admin moderation panels.</p>
+                        <p class="text-amber-200/70 text-sm leading-relaxed">Custom Luau frameworks featuring dynamic vehicle physics, cinematic simulation, and secure admin moderation panels.</p>
                     </div>
                     <div class="mt-8 pt-4 border-t border-purple-900/60 flex items-center justify-between font-mono-code text-xs">
                         <span class="text-amber-300">Status: Live</span>
-                        <button onclick="openRulesModal('Roblox Luau System')" class="text-purple-400 hover:underline uppercase active:scale-95 transition-transform">Submit Booking &rarr;</button>
+                        <button onclick="openRulesModal('Roblox Luau System')" class="cyber-btn text-purple-400 hover:underline uppercase">Submit Booking &rarr;</button>
                     </div>
                 </div>
 
-                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between cursor-pointer" onmouseenter="playSfx('hover')">
+                <div class="tilt-card cyber-glass rounded-3xl p-8 border border-purple-900/60 flex flex-col justify-between cursor-pointer relative overflow-hidden" onmouseenter="playSfx('hover')">
+                    <div class="absolute top-4 right-4 bg-amber-400 text-black text-[10px] font-mono-code font-extrabold px-3 py-1 rounded-full uppercase shadow-lg animate-pulse">
+                        ★ NEW
+                    </div>
                     <div class="space-y-4">
-                        <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono-code">WEB • APP</span>
-                        <h3 class="text-2xl font-bold text-white">ChemNumericals Platform</h3>
-                        <p class="text-amber-200/70 text-sm leading-relaxed">Web tool designed for rapid calculation of physical chemistry numericals and NCERT stoichiometry problems.</p>
+                        <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono-code">CYBERSECURITY • WEB</span>
+                        <h3 class="text-2xl font-bold text-white">CyberSentinel Audit Tool</h3>
+                        <p class="text-amber-200/70 text-sm leading-relaxed">Automated vulnerability scanner and webhook telemetry dashboard built for rapid network diagnostics and security checks.</p>
                     </div>
                     <div class="mt-8 pt-4 border-t border-purple-900/60 flex items-center justify-between font-mono-code text-xs">
                         <span class="text-purple-300">Status: Published</span>
-                        <button onclick="openRulesModal('ChemNumericals Web Engine')" class="text-purple-400 hover:underline uppercase active:scale-95 transition-transform">Submit Booking &rarr;</button>
+                        <button onclick="openRulesModal('CyberSentinel Audit Tool')" class="cyber-btn text-purple-400 hover:underline uppercase">Submit Booking &rarr;</button>
                     </div>
                 </div>
             </div>
@@ -669,7 +783,7 @@
                     <p class="text-amber-200/80 text-sm sm:text-base leading-relaxed">
                         Every project booking inquiry sent from this website instantly dispatches a rich JSON payload to my personal Discord channel!
                     </p>
-                    <button onclick="openRulesModal()" class="px-8 py-4 rounded-xl font-mono-code font-bold text-xs bg-amber-400 text-black hover:bg-amber-300 transition-all uppercase shadow-lg shadow-amber-400/20 active:scale-95">
+                    <button onclick="openRulesModal()" class="cyber-btn px-8 py-4 rounded-xl font-mono-code font-bold text-xs bg-amber-400 text-black uppercase shadow-lg shadow-amber-400/20">
                         Submit Booking
                     </button>
                 </div>
@@ -693,7 +807,7 @@
     <!-- ========================================== -->
     <div id="rules-modal" class="fixed inset-0 z-[95] flex items-center justify-center px-4 bg-black/85 backdrop-blur-md hidden">
         <div class="cyber-glass rounded-3xl max-w-xl w-full p-6 sm:p-8 relative shadow-2xl border border-amber-500/40 space-y-6">
-            <button onclick="closeRulesModal()" class="absolute top-6 right-6 text-amber-400 hover:text-white text-xl active:scale-90">
+            <button onclick="closeRulesModal()" class="cyber-btn absolute top-6 right-6 text-amber-400 hover:text-white text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="space-y-1">
@@ -725,7 +839,6 @@
                     <span class="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 border border-amber-500/30">4</span>
                     <div class="space-y-2 w-full">
                         <p class="text-amber-100 leading-relaxed"><strong class="text-amber-300">Discord ID (Recommended):</strong> If you use Discord, provide your Discord Username or ID below for direct communication.</p>
-                        <!-- Integrated Discord ID Box in Rule 4 -->
                         <input id="rules-discord-id" type="text" class="w-full bg-cyberDark border border-purple-800 rounded-lg px-3 py-2 text-white focus:border-amber-400 focus:outline-none transition-colors" placeholder="e.g. username#0000 or @username">
                     </div>
                 </div>
@@ -736,8 +849,7 @@
                 </div>
             </div>
 
-            <!-- Action Button to proceed to Booking Form -->
-            <button onclick="proceedToBooking()" class="w-full py-3.5 rounded-xl font-bold font-mono-code text-xs bg-gradient-to-r from-amber-400 via-yellow-500 to-purple-600 text-black uppercase shadow-lg shadow-amber-500/25 hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2">
+            <button onclick="proceedToBooking()" class="cyber-btn w-full py-3.5 rounded-xl font-bold font-mono-code text-xs bg-gradient-to-r from-amber-400 via-yellow-500 to-purple-600 text-black uppercase shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2">
                 Move to Booking <i class="fa-solid fa-arrow-right text-xs"></i>
             </button>
         </div>
@@ -749,7 +861,7 @@
     <!-- ========================================== -->
     <div id="booking-modal" class="fixed inset-0 z-[90] flex items-center justify-center px-4 bg-black/80 backdrop-blur-md hidden">
         <div class="cyber-glass rounded-3xl max-w-lg w-full p-8 relative shadow-2xl border border-amber-500/40">
-            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-amber-400 hover:text-white text-xl active:scale-90">
+            <button onclick="closeBookingModal()" class="cyber-btn absolute top-6 right-6 text-amber-400 hover:text-white text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="mb-6 space-y-2">
@@ -789,13 +901,72 @@
                     <label class="block text-amber-300/80 mb-1">PROJECT SCOPE / REQUIREMENTS *</label>
                     <textarea id="form-message" rows="3" required class="w-full bg-cyberDark border border-purple-900 rounded-xl px-4 py-3 text-white focus:border-amber-400 focus:outline-none resize-none" placeholder="Describe project details or specifications..."></textarea>
                 </div>
-                <button type="submit" id="form-submit-btn" class="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-amber-400 via-amber-500 to-purple-600 text-black uppercase shadow-lg shadow-amber-500/25 active:scale-95 transition-all">
+                <button type="submit" id="form-submit-btn" class="cyber-btn w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-amber-400 via-amber-500 to-purple-600 text-black uppercase shadow-lg shadow-amber-500/25">
                     Submit Booking
                 </button>
             </form>
             <div id="form-status" class="hidden mt-4 p-4 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 text-center font-mono-code text-xs">
                 ✔ TRANSMISSION SENT TO DISCORD!
             </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 7. TEAM MODAL PANEL                        -->
+    <!-- ========================================== -->
+    <div id="team-modal" class="fixed inset-0 z-[98] flex items-center justify-center px-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="cyber-glass rounded-3xl max-w-xl w-full p-6 sm:p-8 relative shadow-2xl border border-amber-500/40 space-y-6">
+            <button onclick="closeTeamModal()" class="cyber-btn absolute top-6 right-6 text-amber-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center space-y-2">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-mono-code uppercase">
+                    <i class="fa-solid fa-crown text-amber-400"></i> Team Roster
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white">VIP Team Members</h3>
+                <p class="text-xs font-mono-code text-amber-300/80">Key executive partners and lead developers.</p>
+            </div>
+
+            <!-- VVIP Card: Sophia -->
+            <div class="p-5 rounded-2xl bg-gradient-to-r from-amber-500/15 via-purple-600/20 to-amber-500/15 border-2 border-amber-400 shadow-[0_0_25px_rgba(251,191,36,0.25)] flex flex-col sm:flex-row items-center gap-5 relative overflow-hidden">
+                <div class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-amber-400 text-black font-mono-code font-bold text-[10px] uppercase shadow">
+                    👑 VVIP MEMBER
+                </div>
+                <div class="relative w-20 h-20 rounded-2xl p-[2px] bg-gradient-to-tr from-amber-400 via-pink-400 to-purple-500 shrink-0 shadow-lg">
+                    <img src="sofi.png" alt="Sophia" class="w-full h-full object-cover rounded-[14px]" onerror="this.src='logo.png';">
+                </div>
+                <div class="text-center sm:text-left space-y-2 w-full">
+                    <div>
+                        <h4 class="text-xl font-extrabold text-white tracking-wide">Sophia</h4>
+                        <p class="text-xs font-mono-code text-amber-300">Lead Web & UI Designer • Executive Partner</p>
+                    </div>
+                    <a href="https://guns.lol/s0phia.luv" target="_blank" onclick="playSfx('click')" class="cyber-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono-code font-bold bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow-md uppercase">
+                        <i class="fa-solid fa-heart text-black"></i> View Profile
+                    </a>
+                </div>
+            </div>
+
+            <!-- VIP Card: Vrushabh Kamdi -->
+            <div class="p-5 rounded-2xl bg-cyberDark/90 border border-purple-500/50 flex flex-col sm:flex-row items-center gap-5 relative overflow-hidden">
+                <div class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-purple-500/30 border border-purple-400 text-purple-200 font-mono-code font-bold text-[10px] uppercase">
+                    ⭐ VIP MEMBER
+                </div>
+                <div class="relative w-20 h-20 rounded-2xl p-[2px] bg-gradient-to-tr from-purple-500 to-indigo-500 shrink-0 shadow-lg">
+                    <img src="kandi.png" alt="Vrushabh Kamdi" class="w-full h-full object-cover rounded-[14px]" onerror="this.src='logo.png';">
+                </div>
+                <div class="text-center sm:text-left space-y-2 w-full">
+                    <div>
+                        <h4 class="text-xl font-extrabold text-white tracking-wide">Vrushabh Kamdi</h4>
+                        <p class="text-xs font-mono-code text-purple-300">Full-Stack & Systems Developer</p>
+                    </div>
+                    <a href="https://vrushabhakamdi-dev.github.io/" target="_blank" onclick="playSfx('click')" class="cyber-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono-code font-bold bg-purple-600 text-white shadow-md uppercase">
+                        <i class="fa-solid fa-globe"></i> View Page
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -967,15 +1138,18 @@
             startCounters();
         }
 
-        // Auto-pause when leaving tab, auto-resume when coming back
+        // Page Leave & Visibility Handlers
+        window.addEventListener('pagehide', () => { bgAudio.pause(); sfxAudio.pause(); });
+        window.addEventListener('beforeunload', () => { bgAudio.pause(); sfxAudio.pause(); });
+
         document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
+            if (document.visibilityState === 'hidden') {
                 if (isPlaying) {
                     bgAudio.pause();
                     document.getElementById('eq-container').classList.add('paused');
                     document.getElementById('play-icon').className = 'fa-solid fa-play';
                 }
-            } else {
+            } else if (document.visibilityState === 'visible') {
                 if (isPlaying && !userPausedExplicitly) {
                     bgAudio.play().then(() => {
                         document.getElementById('eq-container').classList.remove('paused');
@@ -1034,7 +1208,7 @@
         }, 33);
 
         // Typing Effect
-        const words = ["Python AI & Bots.", "100+ Shipped Projects.", "ESP32 IoT Hardware.", "Roblox Luau Physics."];
+        const words = ["Python & Node.js Backend.", "Arduino & ESP32 Hardware.", "Cybersecurity & Databases.", "Gaming & Roblox Luau."];
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         const typingElement = document.getElementById('typing-text');
         function typeLoop() {
@@ -1062,14 +1236,25 @@
             });
         }
 
+        // Team Modal Controls
+        function openTeamModal() {
+            playSfx('click');
+            document.getElementById('team-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTeamModal() {
+            playSfx('click');
+            document.getElementById('team-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
         // Modal Controls for 2-step Booking Flow
         let selectedProject = '';
 
         function openRulesModal(projectName = '') {
             playSfx('click');
-            if (projectName) {
-                selectedProject = projectName;
-            }
+            if (projectName) selectedProject = projectName;
             document.getElementById('rules-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
@@ -1096,7 +1281,7 @@
             document.getElementById('form-status').classList.add('hidden');
         }
 
-        // Discord Webhook with target user ping and Discord ID included from Rules panel
+        // Discord Webhook Submission
         const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1561631554344591392/JUgnUf4toir9f5mdo7g-jwIyMdofNoV-2-d_R7e34Gzzg5PRu0Hceb4wNkADlT2D8ZJI";
         const TARGET_PING_USER_ID = "1469928466106548245";
 
@@ -1162,8 +1347,9 @@
                 cmdLine.innerText = `arnav@cyber-amber-kernel:~$ ${e.target.value}`;
                 body.appendChild(cmdLine);
 
-                let resp = input === 'help' ? 'Commands: help, stats, projects, book, clear' :
+                let resp = input === 'help' ? 'Commands: help, stats, projects, team, book, clear' :
                            input === 'stats' ? '100+ Projects | 60+ Platforms Active' :
+                           input === 'team' ? (openTeamModal(), 'Opening team roster...') :
                            input === 'book' ? (openRulesModal(), 'Opening booking rules...') :
                            `Command not recognized: ${input}`;
 
